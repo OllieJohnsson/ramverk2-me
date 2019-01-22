@@ -11,62 +11,16 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(cors());
 
 const indexRoute = require('./routes/index.js');
-const helloRoute = require('./routes/hello.js');
+const reportsRoute = require('./routes/reports.js');
 
 app.use('/', indexRoute);
-app.use('/hello', helloRoute);
-// This is middleware called for all routes.
-// Middleware takes three parameters.
-// app.use((req, res, next) => {
-//     console.log(req.method);
-//     console.log(req.path);
-//     next();
-// });
-
+app.use('/reports', reportsRoute);
 
 // don't show the log when it is test
 if (process.env.NODE_ENV !== 'test') {
     // use morgan to log at command line
     app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
 }
-
-
-// Testing routes with method
-app.get("/user", (req, res) => {
-    res.json({
-        data: {
-            msg: "Got a GET request"
-        }
-    });
-});
-
-app.post("/user", (req, res) => {
-    res.status(201).json({
-        data: {
-            msg: "Got a POST request"
-        }
-    });
-});
-
-app.put("/user", (req, res) => {
-    // res.json({
-    //     data: {
-    //         msg: "Got a PUT request"
-    //     }
-    // });
-    res.status(204).send();
-});
-
-app.delete("/user", (req, res) => {
-    // res.json({
-    //     data: {
-    //         msg: "Got a DELETE request"
-    //     }
-    // });
-    res.status(204).send();
-});
-
-
 
 
 // Add routes for 404 and error handling
