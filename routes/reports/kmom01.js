@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
             },
             {
                 question: "Vad är din TIL för detta kmom?",
-                answer: "Veckans TIL är hur man kan sätta upp en server på digitalocean. Jag har också fått lite bättre koll på olika js-ramverk och hur man kan scaffolda fram bas-projekt."
+                answer: "Veckans TIL är hur man kan sätta upp en server på digitalocean. Jag har också fått lite bättre koll på olika js-ramverk och hur man kan scaffolda fram bas-projekt. Dessutom har jag blivit så pass bättre på tmux att jag uppskattar att använda det."
             }
         ]
     };
