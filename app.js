@@ -11,10 +11,10 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(cors());
 
 const indexRoute = require('./routes/index.js');
-const reportsRoute = require('./routes/reports.js');
+const kmom01Route = require('./routes/reports/kmom01.js');
 
 app.use('/', indexRoute);
-app.use('/reports', reportsRoute);
+app.use('/reports/kmom01', kmom01Route);
 
 // don't show the log when it is test
 if (process.env.NODE_ENV !== 'test') {
