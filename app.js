@@ -12,9 +12,11 @@ app.use(cors());
 
 const indexRoute = require('./routes/index.js');
 const kmom01Route = require('./routes/reports/kmom01.js');
+const userRoute = require('./routes/user.js');
 
 app.use('/', indexRoute);
 app.use('/reports/kmom01', kmom01Route);
+app.use('/user', userRoute);
 
 // don't show the log when it is test
 if (process.env.NODE_ENV !== 'test') {
