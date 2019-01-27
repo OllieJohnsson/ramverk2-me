@@ -19,19 +19,21 @@ module.exports = (function () {
             return;
         }
 
-        const sql = "SELECT * FROM reports WHERE kmom = ?";
+        const sql = "SELECT question, answer FROM reports WHERE kmom = ? ORDER BY rowID";
         db.all(sql, number, (err, rows) => {
             if (err) {
                 next(err);
                 return;
             }
             if (rows.length === 0) {
-                next({
-                    status: 400
-                })
+                res.json({
+                    message: `No reports added for ${kmom}.`
+                });
                 return;
             }
-            res.json(rows);
+            res.json({
+                data: rows
+            });
         });
     }
 
