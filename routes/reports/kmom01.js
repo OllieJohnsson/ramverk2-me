@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
             },
             {
                 question: "Berätta om din katalogstruktur och hur du organiserade din kod, hur tänkte du?",
-                answer: "Jag valde att organisera min kod genom att dela upp den i olika filer. Nu är det inte så många filer än å länge, men det kan nog komma att öka. Jag skapade en katalog för alla mina routes och i den en reports-katalog. I den valde jag att lägga en fil för varje kmom för att slippa få en gigantisk reports-fil. Än så länge har jag bara routes-filerna `routes/index.js` och `routes/reports/kmom01.js"
+                answer: "Jag valde att organisera min kod genom att dela upp den i olika filer. Nu är det inte så många filer än å länge, men det kan nog komma att öka. Jag skapade en katalog för alla mina routes och i den en reports-katalog. I den valde jag att lägga en fil för varje kmom för att slippa få en gigantisk reports-fil. Än så länge har jag bara routes-filerna `routes/index.js` och `routes/reports/kmom01.js."
             },
             {
                 question: "Använde du någon form av scaffolding som ditt valda ramverk erbjuder?",
