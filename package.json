@@ -1,6 +1,6 @@
 {
   "name": "ramverk2-me",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Min me-sida för ramverk2",
   "main": "app.js",
   "homepage": "https://github.com/OllieJohnsson/ramverk2-me#readme",
@@ -16,8 +16,10 @@
   "author": "Oliver Johnsson",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^3.0.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
     "morgan": "^1.9.1",
     "sqlite3": "^4.0.6"
   }

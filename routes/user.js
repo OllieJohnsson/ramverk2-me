@@ -1,32 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./db/texts.sqlite');
-
-router.get('/add', function(req, res, next) {
-    db.run("INSERT INTO users (email, password) VALUES (?, ?)",
-    "user11@example.com",
-    "superlonghashedpasswordthatwewillseehowtohashinthenextsection", (err) => {
-        if (err) {
-            res.json(err);
-            return;
-        }
-
-        res.end("success");
-    });
-    // res.json(data);
-});
+const user = require('../models/user');
 
 
-router.get('/', (req, res, next) => {
-    db.all("SELECT * FROM users", function(err, rows) {
-        if (err) {
-            res.json(err);
-            return;
-        }
+router.get('/users', (req, res, next) => user.getUsers(req, res, next));
 
-        res.json(rows);
-    });
-});
+
+router.post('/register', (req, res, next) => user.registerUser(req, res, next));
+
+
+router.post('/login',
+    (req, res, next) => user.getHashFromEmail(req, res, next),
+    (req, res, next) => user.checkPassword(req, res, next),
+    (req, res, next) => user.getToken(req, res, next),
+    (req, res, next) => user.checkToken(req, res, next),
+    (req, res, next) => user.displayToken(req, res, next));
+
 
 module.exports = router;
