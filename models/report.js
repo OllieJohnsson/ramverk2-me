@@ -25,14 +25,9 @@ module.exports = (function () {
                 next(err);
                 return;
             }
-            if (rows.length === 0) {
-                res.json({
-                    message: `No reports added for ${kmom}.`
-                });
-                return;
-            }
             res.json({
-                data: rows
+                data: rows,
+                message: rows.length === 0 ? `No reports added for ${kmom}.` : ""
             });
         });
     }
