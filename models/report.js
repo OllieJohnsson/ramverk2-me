@@ -19,7 +19,7 @@ module.exports = (function () {
             return;
         }
 
-        const sql = "SELECT * FROM reports WHERE kmom = ? ORDER BY rowID";
+        const sql = "SELECT question, answer, rowID FROM reports WHERE kmom = ? ORDER BY rowID";
         db.all(sql, number, (err, rows) => {
             if (err) {
                 next(err);
