@@ -6,12 +6,12 @@ const report = require('../models/report');
 
 
 router.post("/reports",
-    (req, res, next) => user.checkToken(req, res, next),
+    (req, res, next) => user.checkToken(req, next),
     (req, res, next) => report.addReport(req, res, next));
 
 
 router.delete("/reports",
-    (req, res, next) => user.checkToken(req, res, next),
+    (req, res, next) => user.checkToken(req, next),
     (req, res, next) => report.deleteReport(req, res, next));
 
 
