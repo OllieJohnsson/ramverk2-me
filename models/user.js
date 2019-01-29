@@ -13,14 +13,12 @@ module.exports = (function () {
         const sql = "SELECT * FROM users";
         db.all(sql, (err, rows) => {
             if (err) {
-                res.json(err);
-                return;
+                return next(err);
             }
             if (rows.length === 0) {
-                res.json({
+                return res.json({
                     message: "No users yet"
                 });
-                return;
             }
             res.json(rows);
         });
@@ -38,28 +36,31 @@ module.exports = (function () {
                 if (err) {
                     err.status = 500;
                     err.title = "Failed registering user";
-                    next(err);
-                    return;
+                    switch (err.errno) {
+                        case 19:
+                            err.message = `User with email ${email} is already registered`;
+                            break;
+                    }
+                    return next(err);
                 }
                 res.json({
-                    message: `Successfuly registered user with email: ${email}`
+                    message: `Successfully registered user with email ${email}`
                 });
             });
         });
     }
 
 
-    function getHashFromEmail(req, res, next) {
+    function getHashFromEmail(req, next) {
         const email = req.body.email;
         const sql = "SELECT * FROM users WHERE email = ?";
         db.get(sql, email, (err, row) => {
             if (!row) {
-                next({
-                    status: 500,
-                    title: "Unknown email",
-                    message: `Email ${email} is not in the database`
+                return next({
+                    status: 401,
+                    title: "Unknown email address",
+                    message: `A user with the email address ${email} is not in the database`
                 });
-                return;
             }
             req.body.hash = row.password;
             next();
@@ -67,18 +68,18 @@ module.exports = (function () {
     }
 
 
-    function checkPassword(req, res, next) {
+    function checkPassword(req, next) {
         const email = req.body.email;
         const password = req.body.password;
         const hash = req.body.hash;
 
         bcrypt.compare(password, hash).then(function(result) {
             if(!result) {
-                next({
-                    status: 500,
-                    title: "Wrong email or password"
+                return next({
+                    status: 401,
+                    title: "Unauthorized",
+                    message: "You typed in the wrong email address or password"
                 });
-                return;
             }
             req.body.payload = { email: email };
             next();
@@ -86,7 +87,7 @@ module.exports = (function () {
     }
 
 
-    function getToken(req, res, next) {
+    function getToken(req, next) {
         const payload = req.body.payload;
         const secret = process.env.JWT_SECRET;
         const token = jwt.sign(payload, secret, { expiresIn: '1h'});
@@ -96,23 +97,28 @@ module.exports = (function () {
     }
 
 
-    function checkToken(req, res, next) {
+    function checkToken(req, next) {
         const token = req.headers['x-access-token'];
         const secret = process.env.JWT_SECRET;
 
         jwt.verify(token, secret, function(err, decoded) {
             if (err) {
-                next(err);
-                return;
+                return next({
+                    status: 401,
+                    title: "JWT Error",
+                    message: err
+                });
             }
             next();
         });
     }
 
 
-    function displayToken(req, res, next) {
+    function displayToken(req, res) {
         const token = req.headers['x-access-token'];
+        const email = req.body.email;
         res.json({
+            message: `Successfully logged in ${email}`,
             token: token
         });
     }

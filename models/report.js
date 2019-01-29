@@ -13,17 +13,15 @@ module.exports = (function () {
         const number = kmom.slice(-2);
 
         if (!kmoms.includes(kmom)) {
-            next({
+            return next({
                 status: 400
             });
-            return;
         }
 
         const sql = "SELECT question, answer, rowID FROM reports WHERE kmom = ? ORDER BY rowID";
         db.all(sql, number, (err, rows) => {
             if (err) {
-                next(err);
-                return;
+                return next(err);
             }
             res.json({
                 data: rows,
@@ -40,45 +38,48 @@ module.exports = (function () {
         const answer = req.body.answer;
 
         if (!kmom) {
-            next({
+            return next({
                 message: "No kmom"
             });
-            return;
         }
 
         const sql = "INSERT INTO reports (kmom, question, answer) VALUES (?, ?, ?)";
         db.run(sql, [kmom, question, answer], (err) => {
             if (err) {
-                next(err);
-                return;
+                err.status = 500;
+                err.title = "Failed to add report";
+                switch (err.errno) {
+                    case 19:
+                        err.message = `Question "${question}" already added for kmom ${kmom}`;
+                        break;
+                }
+                return next(err);
             }
 
-        });
-
-        res.json({
-            message: "Successfuly added report",
-            question: question,
-            answer: answer
+            res.json({
+                message: `Successfully added report to kmom ${kmom}`,
+                question: question,
+                answer: answer
+            });
         });
     }
 
 
 
     function deleteReport(req, res, next) {
+        const kmom = req.body.kmom;
         const id = req.body.id;
-        const sql = "DELETE FROM reports WHERE rowID = ?";
-        db.run(sql, id, (err) => {
+        const sql = "DELETE FROM reports WHERE kmom = ? AND rowID = ?";
+        db.run(sql, [kmom, id], (err) => {
             if (err) {
                 next(err);
                 return;
             }
-
             res.json({
                 message: `Deleted report with id: ${id}`
             });
         });
     }
-
 
     return {
         getReport: getReport,
