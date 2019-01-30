@@ -11,7 +11,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "production": "NODE_ENV='production' node app.js"
+    "production": "NODE_ENV='production' node app.js",
+    "deployDB": "rsync -av db/texts.sqlite oliver@178.128.172.165:~/git/ramverk2-me-api/db/"
   },
   "author": "Oliver Johnsson",
   "license": "MIT",
