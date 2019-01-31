@@ -16,5 +16,9 @@ router.post('/login',
     (req, res, next) => user.checkToken(req, next),
     (req, res, next) => user.displayToken(req, res));
 
+router.get('/isLoggedIn',
+    (req, res, next) => user.checkToken(req, next),
+    (req, res, next) => res.json({status: true}));
+
 
 module.exports = router;

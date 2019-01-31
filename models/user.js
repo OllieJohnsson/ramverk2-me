@@ -124,7 +124,6 @@ module.exports = (function () {
     }
 
 
-
     return {
         getUsers: getUsers,
         registerUser: registerUser,
