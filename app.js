@@ -11,16 +11,11 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(cors());
 
 const indexRoute = require('./routes/index.js');
-const kmom01Route = require('./routes/reports/kmom01.js');
-
-
-
 const userRoute = require('./routes/user.js');
 const reportRoute = require('./routes/report.js');
 
 
 app.use('/', indexRoute);
-// app.use('/reports/kmom01', kmom01Route);
 app.use(userRoute);
 app.use('/', reportRoute);
 

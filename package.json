@@ -9,19 +9,26 @@
     "url": "https://github.com/OllieJohnsson/ramverk2-me.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nyc --reporter=html --reporter=text mocha 'test/**/*.js'",
     "start": "nodemon app.js",
     "production": "NODE_ENV='production' node app.js",
-    "deployDB": "rsync -av db/texts.sqlite oliver@178.128.172.165:~/git/ramverk2-me-api/db/"
+    "deployDB": "rsync -av db/texts.sqlite oliver@178.128.172.165:~/git/ramverk2-me-api/db/",
+    "test1": "docker-compose run node_alpine npm test",
+    "test2": "docker-compose run node_10_alpine npm test",
+    "test3": "docker-compose run node_8_alpine npm test"
   },
   "author": "Oliver Johnsson",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^3.0.3",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "morgan": "^1.9.1",
     "sqlite3": "^4.0.6"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "nyc": "^13.2.0"
   }
 }
