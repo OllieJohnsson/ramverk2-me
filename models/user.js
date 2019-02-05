@@ -90,9 +90,9 @@ module.exports = (function () {
     function getToken(req, next) {
         const payload = req.body.payload;
         const secret = process.env.JWT_SECRET;
-        const token = jwt.sign(payload, secret, { expiresIn: '1h'});
+        const token = jwt.sign(payload, secret, { expiresIn: "1h"});
 
-        req.headers['x-access-token'] = token;
+        req.headers["x-access-token"] = token;
         next();
     }
 
