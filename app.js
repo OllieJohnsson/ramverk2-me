@@ -1,7 +1,7 @@
-const express = require('express');
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const express = require("express");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
 const port = 8333;
@@ -10,19 +10,19 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cors());
 
-const indexRoute = require('./routes/index.js');
-const userRoute = require('./routes/user.js');
-const reportRoute = require('./routes/report.js');
+const indexRoute = require("./routes/index.js");
+const userRoute = require("./routes/user.js");
+const reportRoute = require("./routes/report.js");
 
 
-app.use('/', indexRoute);
+app.use("/", indexRoute);
 app.use(userRoute);
-app.use('/', reportRoute);
+app.use("/", reportRoute);
 
 // don't show the log when it is test
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== "test") {
     // use morgan to log at command line
-    app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
+    app.use(morgan("combined")); // 'combined' outputs the Apache style LOGs
 }
 
 
@@ -53,5 +53,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => {
-    console.log(`Example API listening on port ${port}!`);
-})
+    // console.log(`Example API listening on port ${port}!`);
+});

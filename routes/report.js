@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express();
 
-const user = require('../models/user');
-const report = require('../models/report');
+const user = require("../models/user");
+const report = require("../models/report");
 
 
 router.post("/reports",
@@ -15,7 +15,7 @@ router.delete("/reports",
     (req, res, next) => report.deleteReport(req, res, next));
 
 
-router.get('/reports/:kmom', (req, res, next) => report.getReport(req, res, next));
+router.get("/reports/:kmom", (req, res, next) => report.getReport(req, res, next));
 
 
 module.exports = router;

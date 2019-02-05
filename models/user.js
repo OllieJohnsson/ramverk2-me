@@ -1,8 +1,8 @@
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./db/texts.sqlite');
+const sqlite3 = require("sqlite3").verbose();
+const db = new sqlite3.Database("./db/texts.sqlite");
 
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
 
@@ -81,7 +81,7 @@ module.exports = (function () {
                     message: "You typed in the wrong email address or password"
                 });
             }
-            req.body.payload = { email: email };
+            req.body.payload = { email };
             next();
         });
     }
@@ -98,7 +98,7 @@ module.exports = (function () {
 
 
     function checkToken(req, next) {
-        const token = req.headers['x-access-token'];
+        const token = req.headers["x-access-token"];
         const secret = process.env.JWT_SECRET;
 
         jwt.verify(token, secret, function(err, decoded) {
@@ -114,23 +114,23 @@ module.exports = (function () {
     }
 
 
-    function displayToken(req, res) {
-        const token = req.headers['x-access-token'];
+    function displayToken(req, res) {
+        const token = req.headers["x-access-token"];
         const email = req.body.email;
         res.json({
             message: `Successfully logged in ${email}`,
-            token: token
+            token
         });
     }
 
 
     return {
-        getUsers: getUsers,
-        registerUser: registerUser,
-        getHashFromEmail: getHashFromEmail,
-        checkPassword: checkPassword,
-        getToken: getToken,
-        checkToken: checkToken,
-        displayToken: displayToken
+        getUsers,
+        registerUser,
+        getHashFromEmail,
+        checkPassword,
+        getToken,
+        checkToken,
+        displayToken
     };
 }());

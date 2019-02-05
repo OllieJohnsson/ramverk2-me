@@ -1,10 +1,10 @@
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./db/texts.sqlite');
+const sqlite3 = require("sqlite3").verbose();
+const db = new sqlite3.Database("./db/texts.sqlite");
 
 
 module.exports = (function () {
     const kmoms = [
-        'kmom01', 'kmom02', 'kmom03', 'kmom04', 'kmom05', 'kmom06', 'kmom10'
+        "kmom01", "kmom02", "kmom03", "kmom04", "kmom05", "kmom06", "kmom10"
     ];
 
 
@@ -12,7 +12,7 @@ module.exports = (function () {
         const kmom = req.params.kmom;
         const number = kmom.slice(-2);
 
-        if (!kmoms.includes(kmom)) {
+        if (!kmoms.includes(kmom)) {
             return next({
                 status: 400
             });
@@ -20,7 +20,7 @@ module.exports = (function () {
 
         const sql = "SELECT question, answer, rowID FROM reports WHERE kmom = ? ORDER BY rowID";
         db.all(sql, number, (err, rows) => {
-            if (err) {
+            if (err) {
                 return next(err);
             }
             res.json({
@@ -58,8 +58,8 @@ module.exports = (function () {
 
             res.json({
                 message: `Successfully added report to kmom ${kmom}`,
-                question: question,
-                answer: answer
+                question,
+                answer
             });
         });
     }
@@ -82,8 +82,8 @@ module.exports = (function () {
     }
 
     return {
-        getReport: getReport,
-        addReport: addReport,
-        deleteReport: deleteReport
+        getReport,
+        addReport,
+        deleteReport
     };
 }());
