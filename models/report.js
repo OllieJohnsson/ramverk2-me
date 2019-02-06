@@ -70,8 +70,8 @@ module.exports = (function () {
         const question = req.body.question;
         const answer = req.body.answer;
 
-        const sql = "UPDATE reports SET question = ?, answer = ? WHERE kmom = ?";
-        db.run(sql, [question, answer, kmom], (err) => {
+        const sql = "UPDATE reports SET question = ?, answer = ? WHERE kmom = ? AND question = ?";
+        db.run(sql, [question, answer, kmom, question], (err) => {
             if (err) {
                 err.status = 500;
                 err.title = "Failed to update report";
