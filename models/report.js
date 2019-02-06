@@ -65,6 +65,30 @@ module.exports = (function () {
     }
 
 
+    function updateReport(req, res, next) {
+        const kmom = req.body.kmom;
+        const question = req.body.question;
+        const answer = req.body.answer;
+
+        const sql = "UPDATE reports SET question = ?, answer = ? WHERE kmom = ?";
+        db.run(sql, [question, answer, kmom], (err) => {
+            if (err) {
+                err.status = 500;
+                err.title = "Failed to update report";
+                switch (err.errno) {
+                    case 19:
+                        err.message = `Was not able to update the question`;
+                        break;
+                }
+                return next(err);
+            }
+            res.json({
+                message: `Successfully updated report in kmom${kmom}`
+            });
+        });
+    }
+
+
 
     function deleteReport(req, res, next) {
         const kmom = req.body.kmom;
@@ -84,6 +108,7 @@ module.exports = (function () {
     return {
         getReport,
         addReport,
+        updateReport,
         deleteReport
     };
 }());

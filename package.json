@@ -1,15 +1,15 @@
 {
   "name": "ramverk2-me",
   "version": "3.0.0",
-  "description": "Min me-sida för ramverk2",
+  "description": "API till me-sida i ramverk2",
   "main": "app.js",
-  "homepage": "https://github.com/OllieJohnsson/ramverk2-me#readme",
+  "homepage": "https://github.com/OllieJohnsson/ramverk2-me-api#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OllieJohnsson/ramverk2-me.git"
+    "url": "https://github.com/OllieJohnsson/ramverk2-me-api.git"
   },
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text mocha 'test/**/*.js'",
+    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha 'test/**/*.js'",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test-with-coverage": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | codacy-coverage && rm -rf ./coverage",
     "start": "nodemon app.js",

@@ -9,6 +9,9 @@ router.post("/reports",
     (req, res, next) => user.checkToken(req, next),
     (req, res, next) => report.addReport(req, res, next));
 
+router.put("/reports",
+    (req, res, next) => user.checkToken(req, next),
+    (req, res, next) => report.updateReport(req, res, next));
 
 router.delete("/reports",
     (req, res, next) => user.checkToken(req, next),
