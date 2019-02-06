@@ -10,6 +10,8 @@
   },
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha 'test/**/*.js'",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "test-with-coverage": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | codacy-coverage && rm -rf ./coverage",
     "start": "nodemon app.js",
     "production": "NODE_ENV='production' node app.js",
     "deployDB": "rsync -av db/texts.sqlite oliver@178.128.172.165:~/git/ramverk2-me-api/db/",
@@ -21,13 +23,17 @@
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "codacy-coverage": "^3.4.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
+    "mocha-lcov-reporter": "^1.3.0",
     "morgan": "^1.9.1",
     "sqlite3": "^4.0.6"
   },
   "devDependencies": {
+    "coveralls": "^3.0.2",
+    "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "nyc": "^13.2.0"
   }
