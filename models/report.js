@@ -77,7 +77,7 @@ module.exports = (function () {
                 err.title = "Failed to update report";
                 switch (err.errno) {
                     case 19:
-                        err.message = `Was not able to update the question`;
+                        err.message = "Was not able to update the question";
                         break;
                 }
                 return next(err);

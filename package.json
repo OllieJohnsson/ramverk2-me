@@ -32,8 +32,6 @@
     "sqlite3": "^4.0.6"
   },
   "devDependencies": {
-    "coveralls": "^3.0.2",
-    "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "nyc": "^13.2.0"
   }
