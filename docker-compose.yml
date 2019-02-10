@@ -7,6 +7,7 @@ services:
         volumes:
             - ./:/app/
             - /app/node_modules/
+        tty: true
 
     node_10_alpine:
         build:
@@ -15,6 +16,7 @@ services:
         volumes:
             - ./:/app/
             - /app/node_modules/
+        tty: true
 
     node_8_alpine:
         build:
@@ -23,3 +25,4 @@ services:
         volumes:
             - ./:/app/
             - /app/node_modules/
+        tty: true
