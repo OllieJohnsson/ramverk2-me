@@ -42,7 +42,7 @@ describe("Users", () => {
     });
 
 
-    describe("POST /register", () => {
+    describe("POST /register", () => {
         const successMessage = "Successfully registered user with email oliver@me.com";
         const failMessage = "User with email oliver@me.com is already registered";
         it(`200 should register user and return message: "${successMessage}"`, (done) => {
@@ -185,7 +185,7 @@ describe("Users", () => {
             };
             chai.request(server)
                 .post("/reports")
-                .set('x-access-token', this.token)
+                .set("x-access-token", this.token)
                 .send(report)
                 .end((err, res) => {
                     res.should.have.status(200);
