@@ -26,6 +26,7 @@ function testReportLength(kmom, numberOfReports) {
 
 
 describe("Reports", () => {
+
     before(() => {
         db.run("DELETE FROM reports", (err) => {
             if (err) {
@@ -67,8 +68,6 @@ describe("Reports", () => {
                 });
         });
     });
-
-
 
 
 

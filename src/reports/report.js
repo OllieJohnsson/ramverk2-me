@@ -69,10 +69,6 @@ module.exports = (function () {
         const id = req.body.id;
         const sql = "DELETE FROM reports WHERE kmom = ? AND rowID = ?";
         db.run(sql, [kmom, id], (err) => {
-            if (err) {
-                next(err);
-                return;
-            }
             res.json({
                 message: `Deleted report with id: ${id}`
             });
