@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha 'test/**/*.js'",
-    "report-codecov": "nyc report --reporter=text-lcov > ./test.info && codecov",
+    "report-codecov": "nyc report --reporter=text-lcov > ./coverage/coverage.lcov && codecov ./coverage/coverage.lcov",
     "report-codacy": "nyc report --reporter=text-lcov | codacy-coverage",
     "start": "NODE_ENV='development' nodemon app.js",
     "production": "NODE_ENV='production' node app.js",
