@@ -1,17 +1,14 @@
 const express = require("express");
 const router = express();
 
-const user = require("../models/user");
-const report = require("../models/report");
+const user = require("../src/users/user");
+const report = require("../src/reports/report");
 
 
 router.post("/reports",
     (req, res, next) => user.checkToken(req, next),
     (req, res, next) => report.addReport(req, res, next));
 
-router.put("/reports",
-    (req, res, next) => user.checkToken(req, next),
-    (req, res, next) => report.updateReport(req, res, next));
 
 router.delete("/reports",
     (req, res, next) => user.checkToken(req, next),

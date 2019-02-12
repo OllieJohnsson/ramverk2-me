@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
-const port = 8333;
+const port = process.env.NODE_ENV === "test" ? 8334 : 8333;
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -52,6 +52,6 @@ app.use((err, req, res, next) => {
     });
 });
 
-app.listen(port, () => {
-    // console.log(`Example API listening on port ${port}!`);
-});
+const server = app.listen(port, () => console.log(`Me-API listening on port ${port} ${process.env.NODE_ENV}`));
+
+module.exports = server;
