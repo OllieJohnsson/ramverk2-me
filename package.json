@@ -10,9 +10,8 @@
   },
   "scripts": {
     "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha 'test/**/*.js'",
-    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
-    "report-codecov": "nyc report --reporter=lcov > coverage.lcov && codecov -t 8f5239f127aa47ad953723fcd6987343",
-    "test-with-coverage": "nyc report lcovonly -- -R spec && cat ./coverage/lcov.info | codacy-coverage && rm -rf ./coverage",
+    "report-coverage": "nyc report --reporter=text-lcov > ./test.info && codecov -t 1085d590-8f9e-485e-ba68-b3fde1c8451b && cat ./coverage/lcov.info | codacy-coverage",
+    "test-with-coverage": "nyc report lcovonly -- -R spec && cat ./coverage/coverage.lcov | codacy-coverage -u OllieJohnsson -n ramverk2-me-api && rm -rf ./coverage",
     "start": "NODE_ENV='development' nodemon app.js",
     "production": "NODE_ENV='production' node app.js",
     "deployDB": "rsync -av db/texts.sqlite oliver@178.128.172.165:~/git/ramverk2-me-api/db/",
@@ -24,20 +23,22 @@
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "codacy-coverage": "^3.4.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
-    "mocha-lcov-reporter": "^1.3.0",
     "morgan": "^1.9.1",
     "sqlite3": "^4.0.6"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
+    "codacy-coverage": "^3.4.0",
     "codecov": "^3.1.0",
+    "install": "^0.12.2",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
+    "npm": "^6.7.0",
     "nyc": "^13.2.0"
   }
 }
