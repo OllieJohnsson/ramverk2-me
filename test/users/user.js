@@ -104,7 +104,7 @@ describe("Users", () => {
         const successMessage = "Successfully logged in oliver@me.com";
 
 
-        it(`401 should fail to login because email was not registered`, (done) => {
+        it("401 should fail to login because email was not registered", (done) => {
             const user = {
                 email: "wrong@me.com",
                 password: "1234"
@@ -120,7 +120,7 @@ describe("Users", () => {
                 });
         });
 
-        it(`401 should fail to login because wrong password was provided`, (done) => {
+        it("401 should fail to login because wrong password was provided", (done) => {
             const user = {
                 email: "oliver@me.com",
                 password: "123"
@@ -159,7 +159,7 @@ describe("Users", () => {
 
 
     describe("POST /reports", () => {
-        it("401 should fail to post a report because token was not provided", done => {
+        it("401 should fail to post a report because token was not provided", (done) => {
             const report = {
                 kmom: "01",
                 question: "Fråga?",
@@ -177,7 +177,7 @@ describe("Users", () => {
         });
 
 
-        it("200 should post a report", done => {
+        it("200 should post a report", (done) => {
             const report = {
                 kmom: "01",
                 question: "Fråga?",
@@ -197,7 +197,7 @@ describe("Users", () => {
 
 
 
-        it("200 should fail to post report beacuse question already exists in kmom", done => {
+        it("200 should fail to post report beacuse question already exists in kmom", (done) => {
             const report = {
                 kmom: "01",
                 question: "Fråga?",
@@ -205,12 +205,12 @@ describe("Users", () => {
             };
             chai.request(server)
                 .post("/reports")
-                .set('x-access-token', this.token)
+                .set("x-access-token", this.token)
                 .send(report)
                 .end((err, res) => {
                     res.should.have.status(500);
                     res.body.should.be.an("object");
-                    res.body.errors[0].detail.should.equal(`Question "Fråga?" already added for kmom 01`);
+                    res.body.errors[0].detail.should.equal("Question \"Fråga?\" already added for kmom 01");
                     done();
                 });
         });

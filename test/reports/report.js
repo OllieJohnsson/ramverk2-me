@@ -62,7 +62,7 @@ describe("Reports", () => {
                 .get("/reports/hej")
                 .end((err, res) => {
                     res.should.have.status(400);
-                    res.body.errors.should.be.an("array")
+                    res.body.errors.should.be.an("array");
                     done();
                 });
         });
