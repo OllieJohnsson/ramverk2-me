@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 
 describe("Index", () => {
     describe("GET /", () => {
-        it("200 should return something", done => {
+        it("200 should return object with name: Oliver Johnsson", done => {
             chai.request(server)
                 .get("/")
                 .end((err, res) => {
