@@ -9,9 +9,9 @@
     "url": "https://github.com/OllieJohnsson/ramverk2-me.git"
   },
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha 'test/**/*.js'",
-    "report-coverage": "nyc report --reporter=text-lcov > ./test.info && codecov -t 1085d590-8f9e-485e-ba68-b3fde1c8451b && cat ./coverage/lcov.info | codacy-coverage",
-    "test-with-coverage": "nyc report lcovonly -- -R spec && cat ./coverage/coverage.lcov | codacy-coverage -u OllieJohnsson -n ramverk2-me-api && rm -rf ./coverage",
+    "test": "nyc --reporter=html --reporter=text mocha 'test/**/*.js'",
+    "report-codecov": "nyc report --reporter=text-lcov > ./test.info && codecov",
+    "report-codacy": "nyc report --reporter=text-lcov | codacy-coverage",
     "start": "NODE_ENV='development' nodemon app.js",
     "production": "NODE_ENV='production' node app.js",
     "deployDB": "rsync -av db/texts.sqlite oliver@178.128.172.165:~/git/ramverk2-me-api/db/",
